@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>¿Quieres ser mi San Valentín?</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="card">
+
+    <!-- INICIO -->
+    <div id="inicio">
+        <h1>Hola gatita emocha </h1>
+        <p>Toca la pantalla</p>
+        <button id="abrirBtn">Abrir</button>
+    </div>
+
+    <!-- PREGUNTA -->
+    <div id="pregunta" class="hidden">
+        <h1>¿Quieres ser mi San Valentín? 🥺</h1>
+        <p>Prometo hacerte muy feliz 💖</p>
+
+        <button class="si">Sí 🥰</button>
+        <button class="no" id="btnNo">No 🙄</button>
+    </div>
+
+    <!-- INTERMEDIOS -->
+    <div id="intermedio1" class="hidden">
+        <img src="img/gato1.jpg" class="imagen" alt="Gato tierno">
+        <h1>¿Estás segura? 💔</h1>
+        <p>Prometo que no te vas a arrepentir💖</p>
+        <button class="si">Sí 🥰</button>
+        <button class="no" id="btnNo2">No 🙄</button>
+    </div>
+
+    <div id="intermedio2" class="hidden">
+        <img src="img/gato2.jpg" class="imagen" alt="Gato tierno 2">
+        <h1>porfavorcito 😭</h1>
+        <p>Te amo muchote vamos</p>
+        <button class="si">Sí 🥰</button>
+        <button class="no" id="btnNo3">No 🙄</button>
+    </div>
+
+    <div id="intermedio3" class="hidden">
+        <img src="img/gato2.jpg" class="imagen" alt="Gato travieso">
+        <h1>Ok ok... no me dejas otra opción 😈</h1>
+        <p>Muejejejeje</p>
+        <button class="si">Sí 🥰</button>
+        <button class="no" id="btnNo4">No 🙄</button>
+    </div>
+
+    <!-- FINAL -->
+    <div id="final" class="hidden">
+        <h1>Sabía que dirías que sí amochito 😍</h1>
+        <p>Espero que no hayas pensado que era todo</p>
+        <button id="continuarBtn" class="continuar">
+            Ahora mi regalo de verdad
+        </button>
+    </div>
+
+    <!-- TARJETAS EXTRA -->
+    <div id="regalos" class="hidden">
+        <div class="tarjeta">
+            <img src="img/gato5.jpg" class="imagen" alt="Gato travieso">
+            <h1>querida pinchecha</h1>
+            <p>Te hice algo con mucho cariño 💖</p>
+            <button class="siguiente">Siguiente</button>
+        </div>
+
+        <div class="tarjeta hidden">
+            <img src="img/gato4.jpg" class="imagen" alt="Gato travieso">
+            <h1>se que no soy el mejor novio de todos los tiempos</h1>
+            <p>pero siempre me esfuerzo para ser mejor para ti</p>
+            <button class="siguiente">Siguiente</button>
+        </div>
+
+        <div class="tarjeta hidden">
+            <img src="img/gato10.jpg" class="imagen" alt="Gato travieso">
+            <h1>y bueno esto es una pequeña carta que te escribi</h1>
+            <p>Este es la última vez que haces click en siguiente, lo prometo </p>
+            <button class="siguiente">Siguiente</button>
+        </div>
+               <div class="tarjeta hidden">
+            <h1>Te amo</h1>
+            <p>amorcito,
+cada vez que pienso en ti, siento que mi mundo se llena de luz.
+Tus palabras, tu risa, tu forma de amarme…
+todo en ti hace que cada día valga la pena.</p>
+
+<p>Pasamos por momentos que nos pusieron a prueba,
+y aun así seguimos aquí, conectados,
+como estrellas que encuentran su camino en la oscuridad.</p>
+
+<p>Tú eres mi universo,
+el centro de cada pensamiento,
+la razón por la que sonrío aun en los días grises.</p>
+
+<p>Prometo cuidarte, valorarte y hacerte sentir
+que nunca estás sola, que siempre estoy a tu lado.
+Porque amarte es tan natural como respirar,
+y no hay nada en este mundo que quiera más que verte feliz.</p>
+
+<p>Gracias por ser mi compañera,
+mi refugio, mi alegría…
+mi universo.</p>
+
+<p>Con todo mi corazón,
+Tu pelusita</p>
+            <button class="siguiente">Siguiente</button>
+        </div>
+        <div class="tarjeta hidden">
+            <img src="img/gato6.jpg" class="imagen" alt="Gato travieso">
+            <h1>Te menti😈</h1>
+            <p>solo un poquito mas de click en siguiente</p>
+            <button class="siguiente">Siguiente</button>
+        </div>
+        <div class="tarjeta hidden">
+            <img src="img/gatobeso.jpg" class="imagen" alt="Gato travieso">
+            <h1>morcito</h1>
+            <p>Te acuerdas que en el poema dije que eras mi universo?</p>
+            <p>No eran palabras vacias mira</p>
+            <button id="finalizarBtn">regalo de verdad verdad</button>
+        </div>
+    </div>
+
+</div>
+
+<audio id="musicaFondo" loop>
+    <source src="audio/Carla Morrison - Eres tú (letra).mp3" type="audio/mpeg">
+</audio>
+
+<audio id="musicaSi"loop>
+    <source src="audio/Si supieras lo que siento con mirarte - Gonzalo Ávila LETRA.mp3" type="audio/mpeg">
+</audio>
+
+<script src="js/script.js"></script>
+</body>
+</html>
