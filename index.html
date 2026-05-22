@@ -1,140 +1,388 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>¿Quieres ser mi San Valentín?</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para mi Niña </title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: linear-gradient(160deg, #1a0000 0%, #2d0000 50%, #1a0000 100%);
+  min-height: 100vh;
+  font-family: Georgia, 'Times New Roman', serif;
+  overflow-x: hidden;
+}
+
+@keyframes fadeUp    { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+@keyframes float     { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+@keyframes heartbeat { 0%,100%{transform:scale(1)} 50%{transform:scale(1.18)} }
+@keyframes petal     { 0%{transform:translateY(-30px) rotate(0deg);opacity:0} 5%{opacity:0.9} 85%{opacity:0.6} 100%{transform:translateY(110vh) rotate(540deg);opacity:0} }
+@keyframes shimmer   { 0%,100%{opacity:0.7} 50%{opacity:1} }
+@keyframes pulseRing { 0%{box-shadow:0 0 0 0 rgba(180,0,0,0.4)} 70%{box-shadow:0 0 0 16px rgba(180,0,0,0)} 100%{box-shadow:0 0 0 0 rgba(180,0,0,0)} }
+
+.petals { position:fixed; inset:0; pointer-events:none; z-index:0; }
+.petal  { position:absolute; border-radius:60% 40% 60% 40% / 60% 60% 40% 40%; animation:petal linear infinite; opacity:0; }
+
+.page {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 4vw, 2.5rem) 5rem;
+}
+
+.hero {
+  text-align: center;
+  padding: clamp(2rem, 5vw, 4rem) 1rem clamp(1.5rem, 3vw, 2.5rem);
+  animation: fadeUp 1s ease both;
+}
+.hero-flower { animation: float 3.5s ease-in-out infinite; display:inline-block; margin-bottom: 1rem; }
+.hero-flower svg { width: clamp(80px, 12vw, 120px); height: auto; }
+.hero-title {
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  color: #c0392b;
+  font-weight: normal;
+  font-style: italic;
+  line-height: 1.35;
+}
+.hero-sub {
+  font-size: clamp(0.85rem, 1.8vw, 1.05rem);
+  color: #e74c3c;
+  margin-top: 0.5rem;
+  letter-spacing: 0.05em;
+  font-family: -apple-system, sans-serif;
+}
+
+.divider {
+  text-align: center;
+  color: #8b0000;
+  font-size: clamp(0.85rem, 1.5vw, 1.1rem);
+  letter-spacing: 10px;
+  margin: clamp(1.2rem, 2.5vw, 2rem) 0;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+.section {
+  margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+  animation: fadeUp 1s ease both;
+}
+.section-label {
+  text-align: center;
+  font-family: -apple-system, sans-serif;
+  font-size: clamp(0.65rem, 1.2vw, 0.8rem);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #c0392b;
+  margin-bottom: 1rem;
+  opacity: 0.9;
+}
+
+.counter-card {
+  background: rgba(20,0,0,0.85);
+  border: 0.5px solid rgba(180,0,0,0.4);
+  border-radius: clamp(16px, 3vw, 24px);
+  padding: clamp(1.5rem, 3vw, 2.5rem) 1rem;
+  text-align: center;
+  animation: pulseRing 3s ease-in-out infinite;
+}
+.counter-since {
+  font-size: clamp(0.8rem, 1.5vw, 0.95rem);
+  color: #e74c3c;
+  font-family: -apple-system, sans-serif;
+  margin-bottom: 1.5rem;
+  font-style: italic;
+}
+.counter-row {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: clamp(4px, 1.5vw, 16px);
+  flex-wrap: wrap;
+}
+.counter-unit { display:flex; flex-direction:column; align-items:center; min-width: clamp(60px, 10vw, 90px); }
+.counter-num {
+  font-size: clamp(2.2rem, 5vw, 3.8rem);
+  font-weight: normal;
+  color: #c0392b;
+  line-height: 1;
+  font-family: Georgia, serif;
+  font-style: italic;
+}
+.counter-lbl {
+  font-size: clamp(0.6rem, 1.1vw, 0.75rem);
+  color: #e74c3c;
+  font-family: -apple-system, sans-serif;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-top: 6px;
+  opacity: 0.85;
+}
+.counter-sep {
+  font-size: clamp(1.6rem, 3vw, 2.8rem);
+  color: #8b0000;
+  line-height: 1;
+  padding-top: 4px;
+}
+
+.moments-list { display: flex; flex-direction: column; gap: clamp(10px, 2vw, 16px); }
+.moment-card {
+  background: rgba(20,0,0,0.82);
+  border: 0.5px solid rgba(180,0,0,0.3);
+  border-radius: clamp(14px, 2.5vw, 20px);
+  padding: clamp(1.1rem, 2.5vw, 1.6rem) clamp(1rem, 2.5vw, 1.5rem);
+  display: flex;
+  gap: clamp(0.75rem, 2vw, 1.25rem);
+  align-items: flex-start;
+}
+.moment-icon { font-size: clamp(1.6rem, 3vw, 2.2rem); flex-shrink:0; margin-top: 2px; }
+.moment-title {
+  font-size: clamp(0.95rem, 1.8vw, 1.1rem);
+  color: #c0392b;
+  font-style: italic;
+  margin-bottom: 0.4rem;
+  font-family: Georgia, serif;
+}
+.moment-desc {
+  font-size: clamp(0.8rem, 1.5vw, 0.92rem);
+  color: #f5c6c6;
+  line-height: 1.75;
+  font-family: -apple-system, sans-serif;
+}
+
+.letter-card {
+  background: rgba(20,0,0,0.82);
+  border: 0.5px solid rgba(180,0,0,0.3);
+  border-radius: clamp(16px, 3vw, 24px);
+  padding: clamp(1.75rem, 4vw, 3rem) clamp(1.25rem, 4vw, 2.5rem);
+}
+.letter-opening {
+  font-size: clamp(1.05rem, 2vw, 1.3rem);
+  color: #c0392b;
+  font-style: italic;
+  margin-bottom: 1.5rem;
+}
+.letter-body {
+  font-size: clamp(0.92rem, 1.7vw, 1.05rem);
+  color: #f5c6c6;
+  line-height: 2;
+}
+.letter-body p { margin-bottom: 1.4rem; }
+.letter-body em { color: #e74c3c; font-style: italic; }
+.letter-sign {
+  margin-top: 2rem;
+  text-align: right;
+  font-size: clamp(1rem, 1.8vw, 1.2rem);
+  color: #c0392b;
+  font-style: italic;
+}
+
+.closing-heart { text-align:center; padding: clamp(2rem, 4vw, 3.5rem) 1.5rem 1rem; }
+.big-heart { font-size: clamp(2.5rem, 5vw, 3.5rem); animation: heartbeat 2s ease-in-out infinite; display:inline-block; }
+.closing-text {
+  font-size: clamp(0.9rem, 1.7vw, 1.05rem);
+  color: #e74c3c;
+  margin-top: 1rem;
+  font-style: italic;
+  line-height: 1.8;
+}
+
+@media (min-width: 600px) {
+  .moments-list { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .moment-card { flex-direction: column; gap: 0.5rem; }
+  .moment-icon { font-size: 2rem; margin-bottom: 0.4rem; }
+}
+@media (min-width: 900px) {
+  .moments-list { grid-template-columns: 1fr 1fr 1fr; }
+}
+</style>
 </head>
 <body>
 
-<div class="card">
+<div class="petals" id="petals"></div>
 
-    <!-- INICIO -->
-    <div id="inicio">
-        <h1>Hola gatita emocha </h1>
-        <p>Toca la pantalla</p>
-        <button id="abrirBtn">Abrir</button>
+<div class="page">
+
+  <div class="hero">
+    <div class="hero-flower">
+      <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="50" cy="27" rx="9" ry="15" fill="#f48fb1"/>
+        <ellipse cx="50" cy="27" rx="9" ry="15" transform="rotate(60 50 50)" fill="#f06292"/>
+        <ellipse cx="50" cy="27" rx="9" ry="15" transform="rotate(120 50 50)" fill="#ec407a"/>
+        <ellipse cx="50" cy="27" rx="9" ry="15" transform="rotate(180 50 50)" fill="#f48fb1"/>
+        <ellipse cx="50" cy="27" rx="9" ry="15" transform="rotate(240 50 50)" fill="#f06292"/>
+        <ellipse cx="50" cy="27" rx="9" ry="15" transform="rotate(300 50 50)" fill="#ec407a"/>
+        <circle cx="50" cy="50" r="13" fill="#fce4ec"/>
+        <circle cx="50" cy="50" r="8" fill="#f8bbd0"/>
+        <circle cx="50" cy="50" r="4" fill="#e91e8c"/>
+      </svg>
     </div>
+    <div class="hero-title">Para mi Niña,<br>que es todo lo que soñé</div>
+    <div class="hero-sub">Una página solo para ti</div>
+  </div>
 
-    <!-- PREGUNTA -->
-    <div id="pregunta" class="hidden">
-        <h1>¿Quieres ser mi San Valentín? 🥺</h1>
-        <p>Prometo hacerte muy feliz 💖</p>
+  <div class="divider">♥ ♥ ♥</div>
 
-        <button class="si">Sí 🥰</button>
-        <button class="no" id="btnNo">No 🙄</button>
-    </div>
-
-    <!-- INTERMEDIOS -->
-    <div id="intermedio1" class="hidden">
-        <img src="img/gato1.jpg" class="imagen" alt="Gato tierno">
-        <h1>¿Estás segura? 💔</h1>
-        <p>Prometo que no te vas a arrepentir💖</p>
-        <button class="si">Sí 🥰</button>
-        <button class="no" id="btnNo2">No 🙄</button>
-    </div>
-
-    <div id="intermedio2" class="hidden">
-        <img src="img/gato2.jpg" class="imagen" alt="Gato tierno 2">
-        <h1>porfavorcito 😭</h1>
-        <p>Te amo muchote vamos</p>
-        <button class="si">Sí 🥰</button>
-        <button class="no" id="btnNo3">No 🙄</button>
-    </div>
-
-    <div id="intermedio3" class="hidden">
-        <img src="img/gato2.jpg" class="imagen" alt="Gato travieso">
-        <h1>Ok ok... no me dejas otra opción 😈</h1>
-        <p>Muejejejeje</p>
-        <button class="si">Sí 🥰</button>
-        <button class="no" id="btnNo4">No 🙄</button>
-    </div>
-
-    <!-- FINAL -->
-    <div id="final" class="hidden">
-        <h1>Sabía que dirías que sí amochito 😍</h1>
-        <p>Espero que no hayas pensado que era todo</p>
-        <button id="continuarBtn" class="continuar">
-            Ahora mi regalo de verdad
-        </button>
-    </div>
-
-    <!-- TARJETAS EXTRA -->
-    <div id="regalos" class="hidden">
-        <div class="tarjeta">
-            <img src="img/gato5.jpg" class="imagen" alt="Gato travieso">
-            <h1>querida pinchecha</h1>
-            <p>Te hice algo con mucho cariño 💖</p>
-            <button class="siguiente">Siguiente</button>
+  <div class="section">
+    <div class="section-label">Nuestro tiempo juntos</div>
+    <div class="counter-card">
+      <div class="counter-since">Novios desde el 11 de agosto de 2025 🌸</div>
+      <div class="counter-row">
+        <div class="counter-unit">
+          <div class="counter-num" id="c-days">0</div>
+          <div class="counter-lbl">Días</div>
         </div>
-
-        <div class="tarjeta hidden">
-            <img src="img/gato4.jpg" class="imagen" alt="Gato travieso">
-            <h1>se que no soy el mejor novio de todos los tiempos</h1>
-            <p>pero siempre me esfuerzo para ser mejor para ti</p>
-            <button class="siguiente">Siguiente</button>
+        <div class="counter-sep">·</div>
+        <div class="counter-unit">
+          <div class="counter-num" id="c-hours">00</div>
+          <div class="counter-lbl">Horas</div>
         </div>
-
-        <div class="tarjeta hidden">
-            <img src="img/gato10.jpg" class="imagen" alt="Gato travieso">
-            <h1>y bueno esto es una pequeña carta que te escribi</h1>
-            <p>Este es la última vez que haces click en siguiente, lo prometo </p>
-            <button class="siguiente">Siguiente</button>
+        <div class="counter-sep">·</div>
+        <div class="counter-unit">
+          <div class="counter-num" id="c-mins">00</div>
+          <div class="counter-lbl">Minutos</div>
         </div>
-               <div class="tarjeta hidden">
-            <h1>Te amo</h1>
-            <p>amorcito,
-cada vez que pienso en ti, siento que mi mundo se llena de luz.
-Tus palabras, tu risa, tu forma de amarme…
-todo en ti hace que cada día valga la pena.</p>
-
-<p>Pasamos por momentos que nos pusieron a prueba,
-y aun así seguimos aquí, conectados,
-como estrellas que encuentran su camino en la oscuridad.</p>
-
-<p>Tú eres mi universo,
-el centro de cada pensamiento,
-la razón por la que sonrío aun en los días grises.</p>
-
-<p>Prometo cuidarte, valorarte y hacerte sentir
-que nunca estás sola, que siempre estoy a tu lado.
-Porque amarte es tan natural como respirar,
-y no hay nada en este mundo que quiera más que verte feliz.</p>
-
-<p>Gracias por ser mi compañera,
-mi refugio, mi alegría…
-mi universo.</p>
-
-<p>Con todo mi corazón,
-Tu pelusita</p>
-            <button class="siguiente">Siguiente</button>
+        <div class="counter-sep">·</div>
+        <div class="counter-unit">
+          <div class="counter-num" id="c-secs">00</div>
+          <div class="counter-lbl">Segundos</div>
         </div>
-        <div class="tarjeta hidden">
-            <img src="img/gato6.jpg" class="imagen" alt="Gato travieso">
-            <h1>Te menti😈</h1>
-            <p>solo un poquito mas de click en siguiente</p>
-            <button class="siguiente">Siguiente</button>
-        </div>
-        <div class="tarjeta hidden">
-            <img src="img/gatobeso.jpg" class="imagen" alt="Gato travieso">
-            <h1>morcito</h1>
-            <p>Te acuerdas que en el poema dije que eras mi universo?</p>
-            <p>No eran palabras vacias mira</p>
-            <button id="finalizarBtn">regalo de verdad verdad</button>
-        </div>
+      </div>
     </div>
+  </div>
+
+  <div class="divider">♥ ♥ ♥</div>
+
+  <div class="section">
+    <div class="section-label">Nuestros momentos</div>
+    <div class="moments-list">
+
+      <div class="moment-card">
+        <span class="moment-icon">🎵</span>
+        <div>
+          <div class="moment-title">La primera vez que cantaste para mí</div>
+          <div class="moment-desc">Tu voz llegó directo a mi corazón. No era solo una canción eras tu abriéndote y compartiendo algo que es importante para ti, regalándome una parte de ti que no muchos han visto. Ese momento lo guardo como uno de los más bonitos que me has dado.</div>
+        </div>
+      </div>
+
+      <div class="moment-card">
+        <span class="moment-icon">💗</span>
+        <div>
+          <div class="moment-title">La primera vez que me dijiste "te amo"</div>
+          <div class="moment-desc">Hubo palabras antes de esa, muchas. Pero ninguna sonó igual. Cuando lo dijiste, mi corazon supo que estaba donde queria estar y donde necesitaba estar, que lo nuestro tenía nombre y tenía peso.</div>
+        </div>
+      </div>
+
+      <div class="moment-card">
+        <span class="moment-icon">😍</span>
+        <div>
+          <div class="moment-title">La primera vez que nos vimos</div>
+          <div class="moment-desc">Temblé. De verdad temblé. Cuando te vi, no pude evitar mirarte con ojos de amor, pendiente de cada palabra que salia de tu boquita, y aunque estaban tus papas y demas personas para mi en ese momento solo existias tu, tu voz y tu sonrisa, fue una explosion de emociones lo que senti desde el primer segundo que te vi. Simplemente fue perfecto. El mejor día.</div>
+        </div>
+      </div>
+
+      <div class="moment-card">
+        <span class="moment-icon">💍</span>
+        <div>
+          <div class="moment-title">El anillo y el collar en 100 idiomas</div>
+          <div class="moment-desc">Quería que supieras que mi amor no tiene fronteras. Sin importar el país o idioma, lo que siento por ti significa exactamente lo mismo en todos lados: que te amo y que eso no cambia.</div>
+        </div>
+      </div>
+
+      <div class="moment-card">
+        <span class="moment-icon">🌅</span>
+        <div>
+          <div class="moment-title">Nuestras tardes juntos</div>
+          <div class="moment-desc">el tiempo que pasabamos juntos, aunque era corto, para mi era el momento del dia que mas esperaba y anhelaba con todo mi corazon, y aunque se que aveces no hablaba mucho, el problema nunca fuiste tu, todo lo contrario, aunque no lo notaras me estabas ayudando como no te imaginas, eras la luz que iluminaba esos dias oscuros de mierda.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="divider">♥ ♥ ♥</div>
+
+  <div class="section">
+    <div class="section-label">Una carta para ti</div>
+    <div class="letter-card">
+      <div class="letter-opening">Mi chiquita,</div>
+      <div class="letter-body">
+
+        <p>No sé si estas palabras van a alcanzar para decirte lo que siento, pero quiero intentarlo. Porque llevas meses siendo parte de mi vida de una forma que no supe ver hasta que casi la pierdo, y eso no es algo que pueda quedarme callado.</p>
+
+        <p>Desde el primer día que hablamos, algo en mí cambió No fue de golpe, no como en las películas, sino despacio, como cambia la luz en un atardecer: sin que te des cuenta, de pronto todo se ve diferente. <em>Tú me cambiaste.</em> Y lo hiciste siendo exactamente quien eres, sin esforzarte, sin pretender.</p>
+
+        <p>Recuerdo la primera vez que cantaste para mí. No tenías que hacerlo, pero lo hiciste. Y en esa voz tuya entendí que me estabas regalando algo íntimo, algo tuyo. no sabes cuan feliz me hace escuchar tu voz mientras cantas, tu voz mientras me dices amor.</p>
+
+        <p>Y el día que te vi por primera vez temblé. No lo pude disimular aunque intente no temblar demaciado mientras saludaba a tu familia jajaja. Los nervios me llenaron por completo, pero cuando te vi, todo eso se convirtió en algo más bonito: en certeza. Te miré y no pude evitarlo verte como idiota enamorado mientras hablabamos, ver tu sonrisa con ternura y ese rostro que tanto amo, porque eso fue lo que sentí. <em>Fue el mejor día de mi vida por mucho y aunque los nervios me comian vivos fue Perfecto</em>, como si el universo hubiera querido que pasara exactamente así.</p>
+
+        <p>Hubo momentos en que yo estaba muy perdido. Momentos que no te conté del todo porque no quería preocuparte, pero en los que tu voz, tus mensajes, el simple hecho de saber que estabas ahí me devolvieron las ganas de vivir que creía que ya no tenía. Me devolvieron las ganas de levantarme diariamente, de hacer ese esfuerzo de despertar, mirar tus buenos dias y decir "lo hago por ella". <em>Me salvaste chiquita.</em> el dia en el que te pregunte que pasaria si no volvieras a saber de mi, unas simples palabras me salvaron de hacer una locura, me dieron ese impulso que necesitaba para decir, si a ella le importo lo tengo todo.</p>
+
+        <p>Cuando te regalé el anillo y el collar, quería decirte algo que las palabras solas no podían. Quería que supieras que mi amor no tiene frontera, idioma, límite geográfico o limite carnal alguno. En cada uno de esos cien idiomas dice lo mismo: <em>te amo.</em> dos palabras tan simples pero que sentia y vivia tan profundamente.</p>
+
+        <p>Eres lo que más me alegra el día. Cuando aparece tu nombre en la pantalla, algo dentro de mí se tranquiliza. Como si el mundo pudiera estar al revés y aun así saber que mi dia ya valio la pena solo porque estuviste en el. No exagero cuando te digo que te amo, eres y sera la persona mas valiosa y especial para mi, la niña que me enamoro con humildad en sus palabras, la belleza que niegas tener pero que veo y me enamora todos los dias.</p>
+
+        <p>Nunca te vi como una carga. Nunca pasó por mi mente que fueras un error o que estuviera perdiendo el tiempo. <em>Todo lo contrario.</em> El tiempo contigo es el más valioso que he tenido, sobre todo esas tardes tranquilas donde no necesitábamos nada más que estar juntos, Eso es lo que quiero.</p>
+
+        <p>No quiero a alguien mejor porque no existe nadie mejor para mí. Tú eres lo que yo soñé. No soñé con alguien perfecto soñé con alguien real, con alguien que me hiciera sentir en casa. Y eso eres tú. <em>Solo tú.</em></p>
+
+        <p>Sé que tienes cargas que pesan. Sé que hay días en que el mundo te aplasta. Pero quiero que sepas que aquí estoy no para presionarte, no para decirte que todo va a estar bien como los demas, no para pedirte más de lo que puedes dar. Estoy aquí para que no tengas que cargarlo sola. Para ser el lugar donde puedas llegar cuando todo lo demás duele, ser esa persona que te escucha sin juzgar.</p>
+
+        <p><em>No rompas lo que tenemos por un mal momento.</em> Los malos momentos pasan. Lo que hemos construido no se construye fácil, y no con cualquiera. Yo te elegí a ti. Y si me lo permites te voy a seguir eligiendo todos los días hasta mi muerte.</p>
+
+        <p>Todo lo que planeamos todavía existe, no lo quiero dejar ir llamame migajero, aferrado lo que sea, pero me niego a dejarte ir asi, porque te amo, de verdad te amo.</p>
+
+        <p>se que escribi mucho, se que es largo, se que estas cansada, pero todo esto es solo para decirte: <em>eres suficiente para mí. Siempre lo has sido. Y te amo en todos los idiomas, en todos los días, en todas las versiones de nosotros que están por venir, no quiero a alguien mas, no merezco a alguien mejor, el alguien que merezco y quiero ya existe y eres tu.</em></p>
+
+      </div>
+      <div class="letter-sign">te amo y siempre lo hare,<br>Con amor, tu pelusita🌸</div>
+    </div>
+  </div>
+
+  <div class="closing-heart">
+    <div class="big-heart">❤️</div>
+    <div class="closing-text">
+      cada segundo en ese contador<br>
+      es un segundo que elegí estar contigo.
+    </div>
+  </div>
 
 </div>
 
-<audio id="musicaFondo" loop>
-    <source src="audio/Carla Morrison - Eres tú (letra).mp3" type="audio/mpeg">
-</audio>
+<script>
+const start = new Date('2025-08-11T00:00:00');
 
-<audio id="musicaSi"loop>
-    <source src="audio/Si supieras lo que siento con mirarte - Gonzalo Ávila LETRA.mp3" type="audio/mpeg">
-</audio>
+function update() {
+  const diff = Math.max(0, Math.floor((Date.now() - start) / 1000));
+  document.getElementById('c-days').textContent  = Math.floor(diff / 86400);
+  document.getElementById('c-hours').textContent = String(Math.floor((diff % 86400) / 3600)).padStart(2,'0');
+  document.getElementById('c-mins').textContent  = String(Math.floor((diff % 3600) / 60)).padStart(2,'0');
+  document.getElementById('c-secs').textContent  = String(diff % 60).padStart(2,'0');
+}
+update();
+setInterval(update, 1000);
 
-<script src="js/script.js"></script>
+const colors = ['#f48fb1','#f06292','#ec407a','#fce4ec','#f8bbd0','#e91e8c'];
+const container = document.getElementById('petals');
+
+function makePetal() {
+  const el = document.createElement('div');
+  el.className = 'petal';
+  el.style.left = Math.random() * 100 + '%';
+  el.style.background = colors[Math.floor(Math.random() * colors.length)];
+  const dur = 7 + Math.random() * 9;
+  el.style.animationDuration = dur + 's';
+  el.style.animationDelay = (Math.random() * 3) + 's';
+  el.style.width  = (10 + Math.random() * 8) + 'px';
+  el.style.height = (13 + Math.random() * 8) + 'px';
+  container.appendChild(el);
+  setTimeout(() => el.remove(), (dur + 4) * 1000);
+}
+
+for (let i = 0; i < 14; i++) setTimeout(makePetal, i * 500);
+setInterval(makePetal, 1400);
+</script>
+
 </body>
 </html>
